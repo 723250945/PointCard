@@ -1,0 +1,57 @@
+/*页码*/
+@charset "utf-8";
+.page-bar
+{
+    float: left;
+    margin-top:5px;
+    width: 710px;
+    height: 40px;
+    border:1px solid #b8b8b8;
+    position: absolute;
+}
+.page-bar .page-num-ul{
+    width: 710px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.page-num-ul a
+{
+    line-height: 30px;
+    padding:3px 5px;
+    margin:1px 3px;
+}
+.page-num-ul a:hover {
+    background-color:#4DB5F7;
+    color:#FFF;
+    text-decoration:none;
+}
+.page-key
+{
+    width:50px;
+}
+.page-btn
+{
+    border:1px solid #b8b8b8;
+    background-color:#fff3f8;
+    display:inline-block;
+    width:52px;
+    height:25px;
+    line-height:25px;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+}
+.page-go-form
+{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    float: right;
+    display:inline-block;
+}
+.page-go-form input,label,button
+{
+    margin:0px 5px;
+}
+

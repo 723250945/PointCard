@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.OrderDao"><!--指定对应得dao层-->
+
+   <insert id="addOrder" parameterType="Order">
+      INSERT INTO `order`(`orderName`,`uId`,`byTime`,`totalPrice`,`paymenttype`,`paymentState`)
+      VALUES(#{orderName},#{uId},#{byTime},#{totalPrice},#{paymenttype},#{paymentState})
+   </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        UPDATE `order`
+        <set>
+            <if test="paymenttype>0">`paymenttype`=#{paymenttype},</if>
+            <if test="paymentState>0">`paymentState`=#{paymentState},</if>
+        </set>
+        WHERE `id`=#{id}
+    </update>
+
+    <select id="searchByInfo" resultType="Order">
+        SELECT * FROM `order`
+        <where>
+            <if test="id>0">AND `id`=#{id}</if>
+            <if test="uId>0">AND `uId`=#{uId}</if>
+            <if test="byTime!=null">AND `byTime`=#{byTime}</if>
+            <if test="totalPrice>0">AND `totalPrice`=#{totalPrice}</if>
+        </where>
+    </select>
+
+    <select id="searchOrders" resultType="Order">
+        SELECT * FROM `order`
+        <where>
+            <if test="uid>0">AND `uId`=#{uid}</if>
+            <if test="paymentState>0">AND `paymentState`=#{paymentState}</if>
+        </where>
+        ORDER BY `byTime` DESC
+    </select>
+
+    <select id="searchPage" resultType="Order">
+        SELECT * FROM `order`
+        <where>
+            <if test="uid>0">AND `uId`=#{uid}</if>
+            <if test="paymentState>0">AND `paymentState`=#{paymentState}</if>
+        </where>
+        ORDER BY `byTime` DESC limit #{index},#{pagesize}
+    </select>
+
+    <select id="getcount" resultType="Integer">
+        SELECT COUNT(1) FROM `order`
+        <where>
+            <if test="uid>0">AND `uId`=#{uid}</if>
+            <if test="paymentState>0">AND `paymentState`=#{paymentState}</if>
+        </where>
+    </select>
+
+    <delete id="deleteOrder" >
+         DELETE FROM `order` WHERE `id`=#{id}
+    </delete>
+</mapper>

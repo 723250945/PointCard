@@ -1,0 +1,159 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2018/4/12 0012
+  Time: 16:16
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="fm"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>勇士点卡商城</title>
+    <link href="${pageContext.request.contextPath}/static/rootWeb/css/global.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/static/rootWeb/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/static/rootWeb/css/template.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/static/rootWeb/css/home.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!--头部-->
+<header id="header">
+    <div class="header_top">
+        <input type="hidden" id="uId" value="${user.id}">
+        <div class="header_top_left">${user.loginName}您好！欢迎勇士点卡商城
+            <c:choose>
+                <c:when test="${user.loginName !=null}">
+                    [<a href="${pageContext.request.contextPath}/loginOut" target="_parent">注销</a>
+                </c:when>
+                <c:otherwise>
+                    [<a href="${pageContext.request.contextPath}/static/tologin" target="_parent">登录</a>
+                </c:otherwise>
+            </c:choose>
+            | <a href="${pageContext.request.contextPath}/static/toregist" target="_parent">免费注册</a>]</div>
+        <div class="header_top_right">
+            <ul>
+                <li><a href="${pageContext.request.contextPath}/static/help" target="_self">客户服务</a></li>
+                <li>|</li>
+                <li id="menu"><a href="#" target="_self">新手入门</a> <img src="${pageContext.request.contextPath}/static/rootWeb/images/arrow_down.gif"  alt="arrow" />
+                    <div id="dd_menu_top_down">
+                        <a href="#" target="_self">购物保障</a><br />
+                        <a href="#" target="_self">购物流程</a><br />
+                        <a href="#" target="_self">会员介绍</a><br />
+                        <a href="#" target="_self">常见问题</a><br />
+                    </div>
+                </li>
+                <li>|</li>
+                <li><a href="#" target="_self">礼品卡</a></li>
+                <li>|</li>
+                <li><a href="${pageContext.request.contextPath}/tomyOrders" target="_self">我的订单</a></li>
+                <li>|</li>
+                <li><a href="${pageCntext.request.contextPath}/toHome" target="_self">我的账户</a></li>
+                <li>|</li>
+                <li><a href="${pageContext.request.contextPath}/toShop" target="_parent">购物车</a></li>
+                <li><img src="${pageContext.request.contextPath}/static/rootWeb/images/header_shop.gif" alt="shopping"/></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<nav id="nav">
+    <ul>
+        <li><a href="${pageContext.request.contextPath}/static/index"> 首页</a></li>
+        <li><a href="${pageContext.request.contextPath}/toProduct"> 游戏充值</a></li>
+        <li><a href="${pageContext.request.contextPath}/torecharge"> 帐户充值</a></li>
+        <li><a href="${pageContext.request.contextPath}/static/toNews"> 关于我们</a></li>
+    </ul>
+</nav>
+<!--头部end-->
+<!--网站中间内容开始-->
+<div id="homebody">
+    <div id="caView">
+        当前位置：<a href="${pageContext.request.contextPath}/static/index">勇士点卡商城</a> 》点卡中心
+    </div>
+    <div id="bigPic">
+        <img src="${pageContext.request.contextPath}/static/rootWeb/images/uu75.jpg" width="230px" height="150px" alt="">
+    </div>
+    <div id="CVInfo">
+        <ul>
+            <li> <strong>${cards.gName} ${cards.cName}</strong></li>
+            <input type="hidden" id="cid" value="${cards.cId}">
+            <input type="hidden" id="gid" value="${cards.gid}">
+            <input type="hidden" id="price" value="${cards.price}">
+            <input type="hidden" id="gName" value="${cards.gName}">
+            <input type="hidden" id="cName" value="${cards.cName}">
+            <input type="hidden" id="number" value="${cards.number}">
+            <li>市场价：￥<s>${cards.iniPrice}</s></li>
+            <li>会员价：￥${cards.price}</li>
+            <li>库存数量：${cards.number}</li>
+        </ul>
+    </div>
+    <div id="smaillPic">
+        <c:forEach var="imgs" items="${pcitrueList}">
+            <div class="pic"><img src="${pageContext.request.contextPath}/static/rootWeb/images/${imgs.path}" alt=""></div>
+        </c:forEach>
+    </div>
+    <div id="CVBy">
+        好评率：100%
+        <div class="cvbys"><input id="save"  type="button" value="加入购物车"></div>
+        <div class="cvbys"><input id="buy"  type="button" value="立即购买"></div>
+        <div  class="cvbys">选择数量:<input id="numU" type="number" name="byNum" value="1" min="1"></div>
+    </div>
+    <div class="but">
+        <input class="buttonRa" type="button" value="点卡介绍">
+        <input class="buttonRa" type="button" value="点卡评价">
+        <input class="buttonRa" type="button" value="留言投诉">
+    </div>
+    <div id="butInfo">
+        <div id="infoA">
+            ${cards.cInfo}
+        </div>
+        <div id="infoB">
+            <ul>
+                <c:forEach var="info" items="${praiseRateList}">
+                    <c:if test="${info.isPraise==0}">
+                        <li>${info.pInfo}
+                            <p>${info.loginName} &nbsp;&nbsp;&nbsp;<fmt:formatDate value="${info.rateTime}" pattern="yyyy-MM-dd"/></p>
+                        </li>
+                    </c:if>
+                </c:forEach>
+
+            </ul>
+        </div>
+        <div id="infoC">
+            <ul>
+                <c:forEach var="info" items="${praiseRateList}">
+                    <c:if test="${info.isPraise==1}">
+                        <li>${info.pInfo}
+                            <p>${info.loginName} &nbsp;&nbsp;&nbsp;<fmt:formatDate value="${info.rateTime}" pattern="yyyy-MM-dd"/></p>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="path" name="path" value="${pageContext.request.contextPath }"/>
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeBi">
+    <div class="removerChid">
+        <h2>勇士点卡温馨提示!</h2>
+        <div class="removeMain">
+            <p id="info">提示信息？</p>
+            <a href="#" id="yes">确定</a>
+            <a href="#" id="no">取消</a>
+        </div>
+    </div>
+</div>
+<div class="cartshow">
+    <a href="${pageContext.request.contextPath}/toShop">购物车数量：<span class="cartNum">0</span></a>
+</div>
+</body>
+<script src="${pageContext.request.contextPath}/static/rootWeb/js/jquery-1.8.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/rootWeb/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/static/rootWeb/js/cardView.js"></script>
+</html>

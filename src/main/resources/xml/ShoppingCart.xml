@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.ShoppingCartDao"><!--指定对应得dao层-->
+
+   <insert id="addShoppingCart" parameterType="ShoppingCart" >
+       INSERT INTO `shoppingcart`(`uId`,`cId`,`gid`,`num`,`totalPrice`)
+        VALUES(#{uId},#{cId},#{gid},#{num},#{totalPrice})
+   </insert>
+
+    <delete id="deleteCart" parameterType="ShoppingCart">
+        DELETE FROM `shoppingcart` WHERE `id`=#{id}
+    </delete>
+
+    <select id="searchCarts" resultType="ShoppingCart">
+        SELECT s.*,c.cName AS 'cName',c.titleImg AS 'titleImg',c.number AS 'number',c.price AS 'price',c.iniPrice AS 'iniPrice',g.gName AS `gName`
+        FROM `shoppingcart` AS s,`cards` AS c,`games` AS g
+        WHERE s.cId=c.cId AND s.gid=g.gid AND s.uId=#{uId}
+    </select>
+
+    <update id="updateCart" parameterType="ShoppingCart">
+         update `shoppingcart`
+			<set>
+                <if test="num>0">`num`=#{num},</if>
+                <if test="totalPrice>0">`totalPrice`=#{totalPrice},</if>
+            </set>
+			where id = #{id}
+    </update>
+
+    <select id="searchCart" parameterType="ShoppingCart" resultType="ShoppingCart">
+        SELECT * FROM `shoppingcart` WHERE `uId`=#{uId} AND `cId`=#{cId} AND `gid`=#{gid}
+    </select>
+</mapper>

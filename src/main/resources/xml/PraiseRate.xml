@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.PraiseRateDao"><!--指定对应得dao层-->
+
+    <select id="findByCid" resultType="PraiseRate">
+        SELECT p.*,u.loginName AS 'loginName' FROM praiserate AS p,gamecarduser AS u
+        WHERE p.uId=u.id AND p.cId=#{cid} ORDER BY p.rateTime DESC
+    </select>
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.CardsDao"><!--指定对应得dao层-->
+
+    <select id="searchList" resultType="Cards">
+        SELECT c.*,g.`gid` AS gid,g.`gName` AS  gName
+        FROM `cards` AS c JOIN `gameOrCard` AS ga ON c.cid=ga.cid
+        JOIN `games` AS g ON g.`gid`=ga.`gid`
+        JOIN `gamestype` AS ty ON g.`tId`=ty.`tId`
+        <where>
+            <if test="tid>0">AND g.`tid`=#{tid}</if>
+            <if test="gid>0">AND g.`gid`=#{gid}</if>
+            <if test="searchInfo != null and searchInfo != ''">
+                AND CONCAT_WS(
+               c.`cName`,g.`gName`,c.`iniPrice`,ty.`tName`
+                )LIKE CONCAT('%',#{searchInfo},'%')
+            </if>
+        </where>
+        AND c.isShelves=0 and c.`number`>0 ORDER BY g.gid,c.price,c.iniPrice
+        limit #{index},#{pagesize}
+    </select>
+
+    <select id="getcount" resultType="Integer">
+        SELECT COUNT(1)
+        FROM `cards` AS c JOIN `gameOrCard` AS ga ON c.cid=ga.cid
+        JOIN `games` AS g ON g.`gid`=ga.`gid`
+        JOIN `gamestype` AS ty ON g.`tId`=ty.`tId`
+        <where>
+            <if test="tid>0">AND g.`tid`=#{tid}</if>
+            <if test="gid>0">AND g.`gid`=#{gid}</if>
+            <if test="searchInfo != null and searchInfo != ''">
+                AND CONCAT_WS(
+                c.`cName`,g.`gName`,c.`iniPrice`,ty.`tName`
+                )LIKE CONCAT('%',#{searchInfo},'%')
+            </if>
+        </where>
+        AND c.isShelves=0 and c.`number`>0
+    </select>
+
+    <select id="searchNewTime" resultType="Cards">
+        SELECT * FROM cards  WHERE isShelves=0  and `number`>0 ORDER BY upTime DESC LIMIT 0,#{top}
+    </select>
+
+    <select id="searchByInfo" parameterType="Cards" resultType="Cards">
+        SELECT c.*,g.`gid` AS gid,g.`gName` AS  gName
+        FROM `cards` AS c JOIN `gameOrCard` AS ga ON c.cid=ga.cid
+        JOIN `games` AS g ON g.`gid`=ga.`gid`
+          <where>
+              <if test="cId>0">and c.`cId`=#{cId}</if>
+              <if test="gid>0">and g.`gid`=#{gid}</if>
+          </where>
+    </select>
+
+    <select id="searchById" resultType="Cards">
+        SELECT * FROM `cards`
+        WHERE `cId`=#{cId}
+    </select>
+
+    <update id="updateCards" parameterType="Cards">
+        UPDATE `cards`
+        <set>
+            <if test="titleImg != null">`titleImg`=#{titleImg},</if>
+            <if test="cInfo != null">`cInfo`=#{cInfo},</if>
+            <if test="iniPrice>0">`iniPrice`=#{iniPrice},</if>
+            <if test="price>0">`price`=#{price},</if>
+            <if test="praiseRate>0">`praiseRate`=#{praiseRate},</if>
+            <if test="isShelves>-1">`isShelves`=#{isShelves},</if>
+            <if test="number>-1">`number`=#{number},</if>
+            <if test="version>-1">`version`=#{version}+1,</if>
+        </set>
+        WHERE `cId`=#{cId} AND `version`=#{version} and `number`>0
+    </update>
+</mapper>

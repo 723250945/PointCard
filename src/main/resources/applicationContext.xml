@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+    http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd"
+        default-autowire="byName"   >
+
+  <!--数据源,阿里巴巴-->
+  <!--<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="url" value="jdbc:mysql://localhost:3306/onlineqa?useUnicode=true&amp;characterEncoding=utf-8" />
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="username" value="root" />
+    <property name="password" value="111111" />
+    <property name="maxPoolPreparedStatementPerConnectionSize" value="100"/>
+    <property name="maxActive" value="50" />
+  </bean>-->
+
+
+  <!--数据源,读取数据配置文件-->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location" value="classpath:db.properties"/>
+  </bean>
+  <!--数据源,C3p0-->
+  <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="jdbcUrl" value="${DB_URL}"/>
+    <property name="driverClass" value="${DB_DRIVER}"/>
+    <property name="user" value="${DB_NAME}"/>
+    <property name="password" value="${DB_PWD}"/>
+    <property name="maxPoolSize" value="${DB_MAXConnectionSize}" />
+    <property name="maxStatementsPerConnection" value="${DB_MAXActive}"/>
+  </bean>
+  <!--会话工厂-->
+  <bean name="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="typeAliasesPackage" value="cn.jbit.entity" /><!--实体类别名-->
+    <property name="mapperLocations" value="classpath:xml/*.xml"/><!--读取映射文件-->
+  </bean>
+
+
+  <!--扫描dao接口-->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="cn.jbit.dao"/>
+    <property name="sqlSessionFactoryBeanName" value="sessionFactory" />
+  </bean>
+  <!--扫入日志类-->
+  <bean id="log4j" class="cn.jbit.util.Log4j"></bean>
+  <!--启用对@AspectJ注解的支持-->
+  <aop:aspectj-autoproxy proxy-target-class="true"/>
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+  </bean>
+  <!--声明式事务-->
+  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
+      <tx:method name="update*" propagation="REQUIRED"/>
+      <tx:method name="delete*" propagation="REQUIRED" />
+     <!-- <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true"/>
+      <tx:method name="search*" propagation="NOT_SUPPORTED" read-only="true" />
+      <tx:method name="query*" propagation="NOT_SUPPORTED" read-only="true" />-->
+    </tx:attributes>
+  </tx:advice>
+  <aop:config>
+    <aop:pointcut id="pointcut" expression="execution(* cn.jbit.biz..*.*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+    <aop:aspect ref="log4j" >
+      <aop:before method="before" pointcut-ref="pointcut"></aop:before>
+      <aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="result"></aop:after-returning>
+      <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="e"/>
+    </aop:aspect>
+  </aop:config>
+
+</beans>

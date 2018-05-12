@@ -1,0 +1,463 @@
+@charset "utf-8";
+#homebody{
+    width: 960px;
+    height: 700px;
+    margin: 10px auto;
+    border: 1px solid #7B7B7B;
+}
+#hLeft{
+    width: 300px;
+    border: 1px solid #7B7B7B;
+    border-top: none;
+    margin: 10px;
+    float: left;
+}
+#hLeft ul{
+    text-indent: 15px;
+}
+#hLeft ul li{
+    height: 30px;
+    line-height: 30px;
+}
+.titleLi{
+    font-size: 14px;
+    border-bottom: 2px solid #000000;
+    border-top:1px solid #000000;
+}
+#address{
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #000000;
+}
+#addressL{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+}
+#addressR{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: right;
+}
+#addressL>a{
+    font-size: 14px;
+}
+#userInfo{
+    width: 580px;
+    height: 500px;
+    border:1px solid #7B7B7B;
+    margin: 15px;
+}
+#loginOUt{
+    border: 1px solid #7B7B7B;
+    float: right;
+    margin: 5px 7px;
+}
+#userInfo li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-indent: 20px;
+}
+#hRight{
+    width: 600px;
+    margin: 10px 10px 20px;
+    float: left;
+}
+.cards{
+    width: 22%;
+    height: 200px;border: 1px solid red;
+    margin: 1%;
+    float: left;
+}
+
+/*
+点卡详情页面*/
+#caView{
+    font-size: 14px;
+    width: 960px;
+    text-indent: 30px;
+    margin: 10px auto;
+    float: left;
+}
+#caView>a{
+     font-size: 14px;
+ }
+#bigPic{
+    width: 230px;
+    height: 150px;
+    float: left;
+    margin-left: 80px;
+}
+#CVInfo{
+    width: 600px;
+    height: 150px;
+    text-indent: 30px;
+    float: left;
+}
+#CVInfo li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+}
+#smaillPic{
+    width: 940px;
+    height: 85px;
+    float: left;
+    border: 1px solid #7B7B7B;
+    text-indent: 100px;
+    margin: 10px 15px;
+}
+.pic{
+    width: 115px;
+    height: 75px;
+    margin: 5px 10px;
+    float: left;
+}
+#CVBy{
+    width: 810px;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    margin-left: 50px;
+}
+#CVBy .cvbys{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    float: right;
+    margin: 5px 20px;
+}
+.but{
+    width: 910px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    border-bottom: 1px solid #7B7B7B;
+    padding-left: 50px;
+}
+.buttonRa{
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 10px 10px 0px 0px ;
+}
+.onclick{
+    background-color: #4db3f5;
+    color: white;
+}
+#butInfo{
+    width: 910px;
+    height: 500px;
+    float: left;
+    border-bottom: 1px solid #7B7B7B;
+    padding-left: 50px;
+}
+#infoA{
+    width: 850px;
+    height: 500px;
+    padding-top: 20px;
+    font-size: 14px;
+}
+#infoB{
+    width: 850px;
+    height: 500px;
+    padding-top: 20px;
+    font-size: 14px;
+    display: none;
+}
+#infoB p,#infoC p{
+    height: 30px;
+    line-height: 30px;
+    float: right;
+}
+#infoB li,#infoC li{
+    height: 60px;
+    line-height:60px ;
+    border-bottom: 1px solid #7B7B7B;
+}
+#infoC{
+    width: 850px;
+    height: 500px;
+    padding-top: 20px;
+    font-size: 14px;
+    display: none;
+}
+/*
+支付页面*/
+#loginfo{
+    width: 810px;
+    height: 45px;
+    float: left;
+    background-image: url("../images/paymenta.png");
+    background-repeat: no-repeat;
+    margin-left: 150px;
+    margin-top: 20px;
+}
+.loginTitle{
+    width: 810px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin:20px 0px 15px 150px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #7B7B7B;
+}
+#cardsInfo{
+    width: 810px;
+    float: left;
+    margin-left: 150px;
+    font-size: 14px;
+    font-weight: bold;
+}
+#cardsInfo li{
+    height: 30px;
+    line-height: 30px;
+}
+#totalPrice{
+    width: 810px;
+    height: 50px;
+    margin-left: 150px;
+    margin-top: 15px;
+    line-height: 50px;
+    border-top: 1px solid #7B7B7B;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+}
+#numU{
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+}
+#toby{
+    width: 800px;
+    height: 80px;
+    line-height: 80px;
+    float: right;
+    margin-right: 50px;
+    text-align: right;
+}
+#cardsInfo span,#totalPrice span{
+    color: red;
+    font-weight: bold;
+}
+/*选择支付方式页面*/
+#loginfoa{
+     width: 810px;
+     height: 45px;
+     float: left;
+     background-image: url("../images/zhifufang.png");
+     background-repeat: no-repeat;
+     margin-left: 150px;
+     margin-top: 20px;
+ }
+#buttypeA{
+    width: 810px;
+    height: 310px;
+    font-size: 14px;
+    margin: 30px 0px 0px 50px;
+    float: left;
+}
+#buttypeB,#buttypeC,#buttypeD{
+    width: 810px;
+    height: 310px;
+    font-size: 14px;
+    margin: 30px 0px 0px 50px;
+    float: left;
+    display: none;
+}
+#zhifuImga{
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    background-image: url("../images/zhifubao.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+#zhifuImgb{
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    margin-left: 30px;
+    background-image: url("../images/weixin.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+#bankChoice{
+    width: 800px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-indent: 10px;
+    height: 20px;
+    float: left;
+    border-bottom: 2px solid green;
+}
+#bankA,#bankB,#bankC,#bankD,#bankE,#bankF{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    float: left;
+    margin-right: 60px;
+    margin-bottom: 20px;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+#bankA{
+    background-image: url("../images/chinaBank.png");
+}
+#bankB{
+    background-image: url("../images/jiaotongBank.png");
+}
+#bankC{
+     background-image: url("../images/gongshangBank.png");
+ }
+#bankD{
+    background-image: url("../images/nongyeBank.png");
+}
+#bankE{
+    background-image: url("../images/jiansheBank.png");
+}
+#bankF{
+    background-image: url("../images/zhaoshangBank.png");
+}
+#footBut{
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    float: right;
+    text-align: right;
+}
+#buttypeB div{
+    height: 50px;
+    line-height: 50px;
+}
+#buttypeB div:last-of-type{
+    text-indent: 200px;
+}
+/*
+订单支付完成页面*/
+#loginfob{
+    width: 810px;
+    height: 45px;
+    float: left;
+    background-image: url("../images/zhifu3.png");
+    background-repeat: no-repeat;
+    margin-left: 150px;
+    margin-top: 20px;
+}
+#resultNo{
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    float: left;
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-indent: 100px;
+    background-image: url("../images/no.png");
+    background-repeat: no-repeat;
+}
+#resultOk{
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    float: left;
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+    vertical-align: middle;
+    text-indent: 100px;
+    background-image: url("../images/yesss.png");
+    background-repeat: no-repeat;
+}
+#info-panel{
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    margin-left: 300px;
+    float: left;
+    color: blue;
+    font-weight: bold;
+}
+.buttonchoice{
+    display: inline-block;
+    height: 30px;
+    width: 80px;
+    line-height: 30px;
+    margin-right: 30px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #5e8809;
+    border: 1px solid blue;
+}
+
+/*
+购物车*/
+.cartshow{
+     width: 120px;
+     height: 64px;
+    line-height: 64px;
+     background-image: url("../images/savecart.png");
+     background-repeat: no-repeat;
+     position:fixed;
+     bottom:50px;
+     right:30px;
+    text-align: right;
+ }
+.cartshow a{
+    color: green;
+    font-weight: bold;
+}
+.cartNum{
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+/*
+充值页面*/
+.rechargeNum{
+    height: 50px;
+    line-height: 50px;
+    margin: 10px 0px;
+}
+.bua{
+    width: 578px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    border-bottom: 1px solid #7B7B7B;
+    padding-left: 50px;
+}
+#bankChoicea{
+    width: 578px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-indent: 10px;
+    height: 20px;
+    float: left;
+    border-bottom: 2px solid green;
+}
+#buttypeAa{
+    width: 578px;
+    height: 340px;
+    font-size: 14px;
+    margin: 30px 0px 0px 50px;
+    float: left;
+}
+#buttypeCa,#buttypeDa{
+    width: 578px;
+    height: 410px;
+    font-size: 14px;
+    margin: 50px 0px 0px 50px;
+    float: left;
+    display: none;
+}

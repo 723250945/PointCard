@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.CardSalDao"><!--指定对应得dao层-->
+
+    <select id="searchByNum" resultType="CardSal">
+        SELECT a.sId AS sId,a.cId AS cId,SUM(a.num) AS 'num',c.cName AS cName,c.titleImg AS titleImg,c.cInfo AS cInfo
+        FROM cardsal AS a,cards AS c WHERE c.cId=a.cId AND c.isShelves=0 GROUP BY a.cId ORDER BY num DESC LIMIT 0,#{top}
+    </select>
+
+
+    <select id="searchByUid" resultType="CardSal">
+        SELECT c.*,ca.cName AS 'cName',ca.titleImg AS 'titleImg',ca.iniPrice AS 'iniPrice',ca.price AS 'price',g.gName AS 'gName'
+        FROM `cardsal` AS c,`games` AS g ,`cards` AS ca WHERE
+        c.cId=ca.cId AND c.gid=g.gid AND
+        c.`uId`=#{uId} ORDER BY c.`buyTime` DESC
+    </select>
+
+    <insert id="addCardSal" parameterType="CardSal">
+        INSERT  INTO `cardsal`(`cId`,`gid`,`uId`,`buyTime`,`num`,`totalPrice`)
+        VALUES (#{cId},#{gid},#{uId},#{buyTime},#{num},#{totalPrice})
+    </insert>
+
+</mapper>

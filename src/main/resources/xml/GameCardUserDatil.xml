@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jbit.dao.GameCardUserDatilDao"><!--指定对应得dao层-->
+
+    <select id="findbyUid" resultType="GameCardUserDatil">
+        SELECT * FROM GameCardUserDatil
+        <where>
+            <if test="uid>0">and loginID=#{uid}</if>
+        </where>
+    </select>
+
+    <insert id="addUserDatil" parameterType="GameCardUserDatil">
+        INSERT INTO `gameCardUserDatil`(`loginID`,`userName`,`userAddress`,`userQQ`,`userEmail`,`userStep`,`userChange`,`telephone`,`createTime`,`totalPrice`)
+        VALUES(#{loginID},#{userName},#{userAddress},#{userQQ},#{userEmail},#{userStep},#{userChange},#{telephone},#{createTime},#{totalPrice})
+    </insert>
+
+    <update id="updateUserDatil" parameterType="GameCardUserDatil">
+        UPDATE `gamecarduserdatil`
+        <set>
+            <if test="userName !=null">`userName`=#{userName},</if>
+            <if test="userChange > -1">`userChange`=#{userChange},</if>
+            <if test="totalPrice >0">`totalPrice`=#{totalPrice},</if>
+            <if test="userStep >0">`userStep`=#{userStep},</if>
+            <if test="paypwd !=null">`paypwd`=#{paypwd},</if>
+        </set>
+        WHERE `id`=#{id}
+    </update>
+</mapper>
